@@ -2,18 +2,19 @@
 #include <stdlib.h>
 
 char* get_contents(char const* path) {
-  char* buffer = 0;
+  char* buffer;
   long length = 0;
   FILE* f = fopen(path, "rb");
+  int char_size = sizeof(char);
 
   if (f) {
     fseek(f, 0, SEEK_END);
     length = ftell(f);
     fseek(f, 0, SEEK_SET);
 
-    buffer = (char *) malloc((length + 1) * sizeof(char));
+    buffer = (char *) malloc((length + 1) * char_size);
     if (buffer) {
-      fread(buffer, sizeof(char), length, f);
+      fread(buffer, char_size, length, f);
     }
 
     fclose(f);
